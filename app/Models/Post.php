@@ -24,17 +24,15 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
-    
+
     // control how the data is added to the Meilisearch server
     public function toSearchableArray(): array
     {
         return [
-            'id' => (int) $this->title,
             'title' => $this->title,
             'slug' => $this->slug,
             'content' => $this->content,
             'published' => (bool) $this->published,
-            // making sure the category id is treated as a number
             'category_id' => (int) $this->category_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
